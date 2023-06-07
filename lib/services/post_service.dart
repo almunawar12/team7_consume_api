@@ -9,6 +9,7 @@ class PostService {
   Future<http.Response> fetch() async {
     String endPoint = EndPoint.post;
     Uri url = Uri.parse(endPoint);
+    
     return await http.get(
       url,
       headers: RequestHelper.basicHeader(),
@@ -19,7 +20,10 @@ class PostService {
     String endPoint = "${EndPoint.post}/$id/comments";
     Uri url = Uri.parse(endPoint);
 
-    return await http.get(url, headers: RequestHelper.basicHeader());
+    return await http.get(
+      url,
+      headers: RequestHelper.basicHeader(),
+    );
   }
 
   Future<http.Response> create(Post post) async {

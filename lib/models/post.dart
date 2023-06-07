@@ -22,9 +22,9 @@ class Post {
 
   Map<String, dynamic> toMap() {
     return {
-      "userId": "userId",
-      "title": "title",
-      "body": "body",
+      "userId": userId,
+      "title": title,
+      "body": body,
     };
   }
 }
