@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:consume_api/models/post.dart';
@@ -17,6 +18,17 @@ class PostController {
         );
       } else {
         throw Exception();
+      }
+    });
+  }
+
+  Future<bool> delete(int id) async {
+    return await PostService().delete(id).then((res) {
+      inspect(res);
+      if (res.statusCode == HttpStatus.ok) {
+        return true;
+      } else {
+        return false;
       }
     });
   }
