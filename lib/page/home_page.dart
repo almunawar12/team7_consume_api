@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:consume_api/controllers/post_controller.dart';
 import 'package:consume_api/models/post.dart';
+import 'package:consume_api/utils/app_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,9 +50,7 @@ class _HomePageState extends State<HomePage> {
                                   behavior: SnackBarBehavior.floating,
                                 ),
                               );
-                              setState(() {
-                                
-                              });
+                              setState(() {});
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -58,14 +58,18 @@ class _HomePageState extends State<HomePage> {
                                   behavior: SnackBarBehavior.floating,
                                 ),
                               );
-                              setState(() {
-                                
-                              });
+                              setState(() {});
                             }
                           });
                         },
                         child: Card(
                           child: ListTile(
+                            onTap: () {
+                              GoRouter.of(context).pushNamed(
+                                    AppRoutes.post,
+                                    extra: snapshot.data![index],
+                                  );
+                            },
                             title: Text(
                               snapshot.data![index].title,
                               maxLines: 1,

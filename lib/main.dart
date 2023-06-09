@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'ITG Consume API',
+      title: 'Consume API',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
