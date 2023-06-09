@@ -66,9 +66,9 @@ class _HomePageState extends State<HomePage> {
                           child: ListTile(
                             onTap: () {
                               GoRouter.of(context).pushNamed(
-                                    AppRoutes.post,
-                                    extra: snapshot.data![index],
-                                  );
+                                AppRoutes.post,
+                                extra: snapshot.data![index],
+                              );
                             },
                             title: Text(
                               snapshot.data![index].title,

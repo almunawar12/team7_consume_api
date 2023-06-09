@@ -1,6 +1,6 @@
 class Comment {
   final int id;
-  final int name;
+  final String name;
   final String email;
   final String body;
 

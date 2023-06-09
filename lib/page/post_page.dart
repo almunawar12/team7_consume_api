@@ -1,4 +1,5 @@
 import 'package:consume_api/controllers/post_controller.dart';
+import 'package:consume_api/models/comment.dart' as c;
 import 'package:consume_api/models/post.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +24,59 @@ class _PostPageState extends State<PostPage> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.post.title),
-              Text(widget.post.body),
+              Text(
+                widget.post.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              SizedBox(
+                width: size.width,
+                child: Text(
+                  widget.post.body,
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              Expanded(
+                  child: FutureBuilder<List<c.Comment>>(
+                future: postController.fetchComments(widget.post.id),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data!.isNotEmpty) {
+                      List<c.Comment> comments = snapshot.data!;
+                      return ListView.separated(
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(comments[index].name),
+                              subtitle: Text(comments[index].body),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: size.height * 0.03,
+                            );
+                          },
+                          itemCount: comments.length);
+                    } else {
+                      return const Text("Belum ada Komentar");
+                    }
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else {
+                    return const Text("Err");
+                  }
+                },
+              ))
             ],
           ),
         ),
