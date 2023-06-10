@@ -47,7 +47,7 @@ class _PostPageState extends State<PostPage> {
                 height: size.height * 0.02,
               ),
               const Text(
-                "Komentar",
+                "Komentar"
               ),
               SizedBox(
                 height: size.height * 0.01,
@@ -61,11 +61,9 @@ class _PostPageState extends State<PostPage> {
                       List<c.Comment> comments = snapshot.data!;
                       return ListView.separated(
                           itemBuilder: (context, index) {
-                            return Card(
-                              child: ListTile(
-                                title: Text(comments[index].name),
-                                subtitle: Text(comments[index].body),
-                              ),
+                            return ListTile(
+                              title: Text(comments[index].name),
+                              subtitle: Text(comments[index].body),
                             );
                           },
                           separatorBuilder: (context, index) {
@@ -79,16 +77,16 @@ class _PostPageState extends State<PostPage> {
                     }
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const AspectRatio(
+                    return AspectRatio(
                       aspectRatio: 1 / 1,
                       child: SizedBox(
-                        // width: size.width * 0.2,
-                        // height: size.width * 0.2,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
+                        width: size.width * 0.02,
+                        height: size.width * 0.02,
+                        child: const CircularProgressIndicator(),
+                      )
+                      );
                   } else {
-                    return const Text("Err");
+                    return const Text("err");
                   }
                 },
               ))
