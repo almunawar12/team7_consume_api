@@ -44,6 +44,12 @@ class _PostPageState extends State<PostPage> {
                 ),
               ),
               SizedBox(
+                height: size.height * 0.02,
+              ),
+              const Text(
+                "Komentar",
+              ),
+              SizedBox(
                 height: size.height * 0.01,
               ),
               Expanded(
@@ -55,14 +61,16 @@ class _PostPageState extends State<PostPage> {
                       List<c.Comment> comments = snapshot.data!;
                       return ListView.separated(
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(comments[index].name),
-                              subtitle: Text(comments[index].body),
+                            return Card(
+                              child: ListTile(
+                                title: Text(comments[index].name),
+                                subtitle: Text(comments[index].body),
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) {
                             return SizedBox(
-                              height: size.height * 0.03,
+                              height: size.height * 0.0005,
                             );
                           },
                           itemCount: comments.length);
@@ -71,7 +79,14 @@ class _PostPageState extends State<PostPage> {
                     }
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return const AspectRatio(
+                      aspectRatio: 1 / 1,
+                      child: SizedBox(
+                        // width: size.width * 0.2,
+                        // height: size.width * 0.2,
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
                   } else {
                     return const Text("Err");
                   }
